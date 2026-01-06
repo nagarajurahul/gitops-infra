@@ -1,0 +1,39 @@
+---
+extends: default
+
+rules:
+  comments:
+    min-spaces-from-content: 1
+
+  comments-indentation: false
+
+  braces:
+    max-spaces-inside: 1
+
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+
+  line-length:
+    max: 200
+    level: warning
+
+  truthy:
+    level: warning
+
+  indentation:
+    indent-sequences: consistent
+    check-multi-line-strings: false
+
+  document-start:
+    present: true
+
+  new-line-at-end-of-file:
+    level: warning
+
+  trailing-spaces:
+    level: warning
+
+  empty-lines:
+    max: 3
+    level: warning
