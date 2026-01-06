@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/nagarajurahul/gitops-platform
     targetRevision: main
-    path: platform
+    path: cluster/prod
   syncPolicy:
     automated:
       prune: true
