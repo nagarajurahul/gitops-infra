@@ -52,7 +52,6 @@ spec:
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
-      name: ""
 
   namespaceResourceBlacklist:
     - group: ""
