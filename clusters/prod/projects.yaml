@@ -1,3 +1,4 @@
+# https://argo-cd.readthedocs.io/en/latest/operator-manual/project-specification/
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -13,8 +14,13 @@ spec:
   destinations:
     - namespace: "*"
       server: https://kubernetes.default.svc
-
   # Allow cluster-scoped resources for platform add-ons
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  permitOnlyProjectScopedClusters: false
