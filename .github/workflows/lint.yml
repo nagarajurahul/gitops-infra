@@ -1,0 +1,26 @@
+---
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    name: Lint & Validate All Application Yaml Files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Install Yaml linters
+      run: |
+        pip install yamllint
+
+    # -----------------------------
+    # 1) YAML LINT (entire repo)
+    # -----------------------------
+    - name: Run yamllint
+      run: yamllint -c .yamllint.yml .
