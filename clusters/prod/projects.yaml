@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-30"
+spec:
+  description: Cluster platform services (ingress, certs, policy, monitoring, secrets)
+  sourceRepos:
+    - https://github.com/nagarajurahul/gitops-platform
+    - https://github.com/nagarajurahul/helm-charts
+  destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+
+  # Allow cluster-scoped resources for platform add-ons
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
