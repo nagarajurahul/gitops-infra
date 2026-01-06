@@ -12,15 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
-    - name: Install Yaml linters
-      run: |
-        pip install yamllint
+      - name: Install Yaml linters
+        run: |
+          pip install yamllint
 
-    # -----------------------------
-    # 1) YAML LINT (entire repo)
-    # -----------------------------
-    - name: Run yamllint
-      run: yamllint .
+      # -----------------------------
+      # 1) YAML LINT (entire repo)
+      # -----------------------------
+      - name: Run yamllint
+        run: yamllint .
