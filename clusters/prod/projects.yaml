@@ -20,7 +20,50 @@ spec:
       kind: "*"
 
   namespaceResourceWhitelist:
-    - group: '*'
-      kind: '*'
+    - group: "*"
+      kind: "*"
+
+  permitOnlyProjectScopedClusters: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-30"
+spec:
+  description: Workloads (business applications)
+  sourceRepos:
+    - https://github.com/nagarajurahul/gitops-apps
+    - https://github.com/nagarajurahul/helm-charts
+  # Restrict where apps can deploy (tighten this over time)
+  destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+    # Do not allow any app to be installed in `kube-system`
+    - namespace: "!kube-system"
+      server: "*"
+  # Apps should not be allowed to create cluster-wide resources
+  clusterResourceBlacklist:
+    - group: "*"
+      kind: "*"
+
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+      name: ""
+
+  namespaceResourceBlacklist:
+    - group: ""
+      kind: ResourceQuota
+    - group: ""
+      kind: LimitRange
+    - group: ""
+      kind: NetworkPolicy
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
 
   permitOnlyProjectScopedClusters: false
