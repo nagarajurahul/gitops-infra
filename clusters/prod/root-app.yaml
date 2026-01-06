@@ -1,0 +1,50 @@
+# Make sure to create AppProjects before deploying this
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prod-bootstrap
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"
+spec:
+  generators:
+    - list:
+        elements:
+          - name: platform
+            repo: https://github.com/nagarajurahul/gitops-platform
+            targetRevision: main
+            # clusters/prod must be a Kustomize root
+            path: clusters/prod
+            wave: "-20"
+            project: platform
+          - name: apps
+            repo: https://github.com/nagarajurahul/gitops-apps
+            targetRevision: main
+            # clusters/prod must be a Kustomize root
+            path: clusters/prod
+            wave: "-20"
+            project: apps
+  template:
+    metadata:
+      name: "{{name}}"
+      namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: "{{wave}}"
+    spec:
+      project: "{{project}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      source:
+        repoURL: "{{repo}}"
+        targetRevision: "{{targetRevision}}"
+        path: "{{path}}"
+        # ArgoCD will treat every YAML under clusters/prod as a deployable manifest
+        # It bypasses your intended ordering inside those repos
+        # It ignores your carefully designed sync waves per app
+        # directory:
+        #   recurse: true
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
