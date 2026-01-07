@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/nagarajurahul/gitops-infra
     targetRevision: main
-    path: clusters/prod
+    path: clusters/prod/prod-us-east-1
 
   syncPolicy:
     automated:
