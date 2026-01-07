@@ -21,9 +21,10 @@ before higher waves are applied.
 | **10** | Platform services | Monitoring, logging, observability stack |
 | **20** | Security enforcement | Gatekeeper constraints (audit → enforce) |
 | **30** | Ingress & networking | Ingress controllers, DNS, load balancers |
-| **40** | Stateful workloads | Databases, message queues, caches |
-| **50** | Backend services | APIs, background workers, internal services |
-| **60** | Frontend services | UI applications, public endpoints |
+| **40** | ApplicationSets | Business Apps |
+| **50** | Stateful workloads | Databases, message queues, caches |
+| **60** | Backend services | APIs, background workers, internal services |
+| **70** | Frontend services | UI applications, public endpoints |
 
 ---
 
