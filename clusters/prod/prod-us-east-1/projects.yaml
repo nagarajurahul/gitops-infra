@@ -18,11 +18,9 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-
   namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
-
   permitOnlyProjectScopedClusters: false
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -48,11 +46,11 @@ spec:
   clusterResourceBlacklist:
     - group: "*"
       kind: "*"
-
+  # Apps should be able to create namespace for itself
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
-
+  # this should be taken care seperately usually by platform team
   namespaceResourceBlacklist:
     - group: ""
       kind: ResourceQuota
@@ -60,9 +58,7 @@ spec:
       kind: LimitRange
     - group: ""
       kind: NetworkPolicy
-
   namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
-
   permitOnlyProjectScopedClusters: false
