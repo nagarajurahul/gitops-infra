@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: prod-bootstrap
+  name: appset-prod-us-east-1
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -10,14 +10,14 @@ spec:
   generators:
     - list:
         elements:
-          - name: platform
+          - name: platform-prod-us-east-1
             repo: https://github.com/nagarajurahul/gitops-platform
             targetRevision: main
             # clusters/prod must be a Kustomize root
             path: clusters/prod
             wave: "-20"
             project: platform
-          - name: apps
+          - name: apps-prod-us-east-1
             repo: https://github.com/nagarajurahul/gitops-apps
             targetRevision: main
             # clusters/prod must be a Kustomize root
