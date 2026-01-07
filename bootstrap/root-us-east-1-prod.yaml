@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-prod-us-east-1
+  name: root-us-east-1-prod
   namespace: argocd
   labels:
     app.kubernetes.io/managed-by: argocd
-    cluster: prod-us-east-1
+    cluster: us-east-1-prod
 spec:
   project: default
 
@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: https://github.com/nagarajurahul/gitops-infra
     targetRevision: main
-    path: clusters/prod/prod-us-east-1
+    path: clusters/prod/us-east-1
 
   syncPolicy:
     automated:
